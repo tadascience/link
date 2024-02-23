@@ -1,7 +1,19 @@
 link <- function(url, text) {
   glue::glue('<a href="{url}">{text}</a>')
 }
-
+#' Create a link to a function or a package
+#'
+#' @param topic topic
+#' @param package package
+#'
+#' @examples
+#' link::to
+#' \dontrun{
+#'   link::to(dplyr::summarise)
+#'   link::to(package = "dplyr")
+#'   link::to("gather", package = "tidyr")
+#' }
+#'
 #' @importFrom rlang is_string is_call enexpr
 #' @importFrom cli cli_abort
 #' @export
