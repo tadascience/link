@@ -1,0 +1,15 @@
+Package: link
+Title: Hyperlinks
+Version: 0.0.0.9000
+Authors@R: 
+    person("Romain", "François", email = "romain@tada.science", role = c("aut", "cre"))
+Description: Hyperlink tools for blogs.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+Imports: 
+    cli,
+    downlit,
+    glue,
+    rlang

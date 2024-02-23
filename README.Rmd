@@ -1,0 +1,41 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# link
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN status](https://www.r-pkg.org/badges/version/link)](https://CRAN.R-project.org/package=link)
+<!-- badges: end -->
+
+The goal of link is to ...
+
+## Installation
+
+You can install the development version of link like so:
+
+``` r
+pak::pak("tadascience/link")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+link::to(dplyr::mutate)
+link::to(package = "dplyr")
+link::to("gather", package = "tidyr")
+```
