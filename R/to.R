@@ -7,7 +7,6 @@ link <- function(url, text) {
 #' @param package package
 #'
 #' @examples
-#' link::to
 #' \dontrun{
 #'   link::to(dplyr::summarise)
 #'   link::to(package = "admiral")

@@ -15,7 +15,6 @@ to(topic, package)
 Create a link to a function or a package
 }
 \examples{
-link::to
 \dontrun{
   link::to(dplyr::summarise)
   link::to(package = "admiral")

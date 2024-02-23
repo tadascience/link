@@ -36,7 +36,8 @@ pak::pak("tadascience/link")
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
-link::to(dplyr::mutate)
-link::to(package = "dplyr")
-link::to("gather", package = "tidyr")
+link::to(package = "admiral")
+
+link::to("init", package = "teal")
+link::to(teal::init)
 ```
