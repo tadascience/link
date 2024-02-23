@@ -39,5 +39,6 @@ This is a basic example which shows you how to solve a common problem:
 link::to(package = "admiral")
 
 link::to("summarise", package = "dplyr")
+
 link::to(tidyr::gather)
 ```

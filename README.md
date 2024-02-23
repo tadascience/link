@@ -32,6 +32,7 @@ link::to(package = "admiral")
 
 link::to("summarise", package = "dplyr")
 #> <a href="https://dplyr.tidyverse.org/reference/summarise.html">dplyr::summarise()</a>
+
 link::to(tidyr::gather)
 #> <a href="https://tidyr.tidyverse.org/reference/gather.html">tidyr::gather()</a>
 ```
