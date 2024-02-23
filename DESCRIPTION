@@ -13,5 +13,5 @@ Imports:
     downlit,
     glue,
     rlang
-URL: https://github.com/tadascience/link
+URL: https://github.com/tadascience/link, http://tada.science/link/
 BugReports: https://github.com/tadascience/link/issues
