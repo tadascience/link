@@ -30,11 +30,8 @@ This is a basic example which shows you how to solve a common problem:
 link::to(package = "admiral")
 #> <a href="https://pharmaverse.github.io/admiral/">admiral</a>
 
-link::to("init", package = "teal")
-#> Registered S3 method overwritten by 'teal':
-#>   method        from      
-#>   c.teal_slices teal.slice
-#> <a href="https://insightsengineering.github.io/teal/latest-tag/reference/init.html">teal::init()</a>
-link::to(teal::init)
-#> <a href="https://insightsengineering.github.io/teal/latest-tag/reference/init.html">teal::init()</a>
+link::to("summarise", package = "dplyr")
+#> <a href="https://dplyr.tidyverse.org/reference/summarise.html">dplyr::summarise()</a>
+link::to(tidyr::gather)
+#> <a href="https://tidyr.tidyverse.org/reference/gather.html">tidyr::gather()</a>
 ```

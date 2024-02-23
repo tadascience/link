@@ -7,10 +7,11 @@ link <- function(url, text) {
 #' @param package package
 #'
 #' @examples
+#' link::to(link::to)
 #' \dontrun{
-#'   link::to(dplyr::summarise)
 #'   link::to(package = "admiral")
-#'   link::to("init", package = "teal")
+#'   link::to("summarise", package = "dplyr")
+#'   link::to(tidyr::gather)
 #' }
 #'
 #' @importFrom rlang is_string is_call enexpr
