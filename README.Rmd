@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/tadascience/link/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tadascience/link/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of link is to ...
+The goal of link is to help blog authors include links to their prose.
 
 ## Installation
 

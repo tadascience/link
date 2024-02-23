@@ -12,7 +12,7 @@ status](https://www.r-pkg.org/badges/version/link)](https://CRAN.R-project.org/p
 [![R-CMD-check](https://github.com/tadascience/link/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tadascience/link/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of link is to …
+The goal of link is to help blog authors include links to their prose.
 
 ## Installation
 
