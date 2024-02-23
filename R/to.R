@@ -10,8 +10,8 @@ link <- function(url, text) {
 #' link::to
 #' \dontrun{
 #'   link::to(dplyr::summarise)
-#'   link::to(package = "dplyr")
-#'   link::to("gather", package = "tidyr")
+#'   link::to(package = "admiral")
+#'   link::to("init", package = "teal")
 #' }
 #'
 #' @importFrom rlang is_string is_call enexpr

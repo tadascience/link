@@ -18,8 +18,8 @@ Create a link to a function or a package
 link::to
 \dontrun{
   link::to(dplyr::summarise)
-  link::to(package = "dplyr")
-  link::to("gather", package = "tidyr")
+  link::to(package = "admiral")
+  link::to("init", package = "teal")
 }
 
 }
