@@ -64,40 +64,7 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">link</span><span class="fu">::</span><span class="va">to</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> function (topic, package) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (missing(topic)) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         if (missing(package) || !is_string(package)) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             cli_abort("{.arg package} must be a single string")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         link(downlit::href_package(package), package)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     else {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         if (!missing(package) &amp;&amp; is_string(package)) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             text &lt;- glue::glue("{package}::{topic}()")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             url &lt;- downlit::href_topic(topic, package = package)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             if (is.na(url)) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 cli_abort("Can't find link for {text}")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             link(url, text)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         else {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             topic &lt;- enexpr(topic)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             if (!is_call(topic, "::")) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 cli_abort("{.arg topic} must be of the form &lt;pkg&gt;::&lt;topic&gt;")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             package &lt;- as.character(topic[[2]])</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             topic &lt;- as.character(topic[[3]])</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             text &lt;- glue::glue("{package}::{topic}()")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             link(downlit::href_topic(topic, package = package), </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 text)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x55e256dab7c0&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:link&gt;</span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu">link</span><span class="fu">::</span><span class="fu">to</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="va">summarise</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">link</span><span class="fu">::</span><span class="fu">to</span><span class="op">(</span>package <span class="op">=</span> <span class="st">"admiral"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">link</span><span class="fu">::</span><span class="fu">to</span><span class="op">(</span><span class="st">"init"</span>, package <span class="op">=</span> <span class="st">"teal"</span><span class="op">)</span></span></span>
