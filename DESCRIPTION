@@ -12,6 +12,8 @@ Imports:
     cli,
     downlit,
     glue,
-    rlang
+    knitr,
+    rlang,
+    stringr
 URL: https://github.com/tadascience/link, http://tada.science/link/
 BugReports: https://github.com/tadascience/link/issues
