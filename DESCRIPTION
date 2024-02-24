@@ -15,5 +15,5 @@ Imports:
     knitr,
     rlang,
     stringr
-URL: https://github.com/tadascience/link, http://tada.science/link/
+URL: https://github.com/tadascience/link, https://link.tada.science/
 BugReports: https://github.com/tadascience/link/issues
