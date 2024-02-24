@@ -24,15 +24,5 @@ pak::pak("tadascience/link")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-link::to(package = "admiral")
-#> <a href="https://pharmaverse.github.io/admiral/">admiral</a>
-
-link::to("summarise", package = "dplyr")
-#> <a href="https://dplyr.tidyverse.org/reference/summarise.html">dplyr::summarise()</a>
-
-link::to(tidyr::gather)
-#> <a href="https://tidyr.tidyverse.org/reference/gather.html">tidyr::gather()</a>
-```
+Include this in your `Rmd` or `qmd` document to turn `<pkg>::<fun>()`
+and `{<pkg>}` into hyperlinks.

@@ -6,21 +6,17 @@ autolink_pkg <- function(x) {
   stringr::str_replace_all(
     x, rx_pkg,
     function(pkg) {
-      to(package = stringr::str_extract(pkg, rx_pkg, group = 1))
+      pkg <- stringr::str_extract(pkg, rx_pkg, group = 1)
+      url <- downlit::href_package(pkg)
+      glue::glue('<a href="{url}">{{{pkg}}}</a>')
     }
   )
 }
 
 autolink_call <- function(x) {
-  rx_call <- glue::glue("[{{]({rx_valid_pkg})::({rx_valid_fun})[(][)][}}]")
+  rx_call <- glue::glue("({rx_valid_pkg})::({rx_valid_fun})\\(\\)")
   stringr::str_replace_all(
-    x, rx_call,
-    function(call){
-      to(
-        package = stringr::str_extract(call, rx_call, group = 1),
-        topic   = stringr::str_extract(call, rx_call, group = 2)
-      )
-    }
+    x, rx_call, downlit::autolink
   )
 
 }
@@ -37,5 +33,4 @@ auto <- function() {
 
     default_text_hook(x)
   })
-
 }

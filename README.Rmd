@@ -33,12 +33,11 @@ pak::pak("tadascience/link")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Include this in your `Rmd` or `qmd` document to turn 
+`<pkg>::<fun>()` and `{<pkg>}` into hyperlinks. 
 
-```{r example}
-link::to(package = "admiral")
-
-link::to("summarise", package = "dplyr")
-
-link::to(tidyr::gather)
+````
+```{r, echo = FALSE}
+link::auto()
 ```
+````
