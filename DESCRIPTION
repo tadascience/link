@@ -9,11 +9,9 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Imports: 
-    cli,
     downlit,
     glue,
     knitr,
-    rlang,
     stringr
 URL: https://github.com/tadascience/link, https://link.tada.science/
 BugReports: https://github.com/tadascience/link/issues
