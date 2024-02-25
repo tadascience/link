@@ -10,6 +10,8 @@ auto()
 Setup automatic linking
 }
 \examples{
-auto()
+\dontrun{
+  auto()
+}
 
 }

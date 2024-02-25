@@ -61,7 +61,9 @@ autolink_call <- function(x) {
 #' Setup automatic linking
 #'
 #' @examples
-#' auto()
+#' \dontrun{
+#'   auto()
+#' }
 #'
 #' @export
 auto <- function() {
