@@ -2,7 +2,7 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-02-24T21:12Z
+last_built: 2024-02-25T12:40Z
 urls:
   reference: http://link.tada.science/reference
   article: http://link.tada.science/articles
