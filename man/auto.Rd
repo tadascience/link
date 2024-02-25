@@ -9,3 +9,7 @@ auto()
 \description{
 Setup automatic linking
 }
+\examples{
+auto()
+
+}
