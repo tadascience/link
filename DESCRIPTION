@@ -1,6 +1,6 @@
 Package: link
 Title: Hyperlinks
-Version: 0.0.0.9000
+Version: 2024.2.0
 Authors@R: 
     person("Romain", "François", email = "romain@tada.science", role = c("aut", "cre"))
 Description: Hyperlink tools for blogs.
