@@ -19,5 +19,5 @@ Imports:
     rlang,
     stringr,
     xml2
-URL: https://github.com/tadascience/link, https://link.tada.science/
+URL: https://link.tada.science/, https://github.com/tadascience/link
 BugReports: https://github.com/tadascience/link/issues

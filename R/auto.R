@@ -4,6 +4,55 @@ rx_valid_fun <- "([a-zA-Z]\\w*|\\.\\w+)"
 rx_pkg  <- glue::glue("[{{]({rx_valid_pkg})[}}]")
 rx_call <- glue::glue("({rx_valid_pkg})::({rx_valid_fun})\\(\\)")
 
+#' Setup automatic linking
+#'
+#' @param type "plain" for plain links, "tooltip" for adding a tooltip
+#' @param keep_braces Should the braces be kept ?
+#' @param keep_pkg_prefix Should the package prefix be kept ?
+#' @param pkg package name
+#' @param call Function call of the form `pkg::fun()`
+#' @param ... See [bslib::tooltip()]
+#'
+#' @examples
+#'
+#' \dontrun{
+#'   # auto is mostly meant to be called inside rmarkdown or quarto documents
+#'   auto()
+#'   auto(keep_braces = FALSE, keep_pkg_prefix = FALSE)
+#'
+#'   # manually generate the tooltips for {pkg} and pkg::fun()
+#'   link::to_pkg("tidyverse")
+#'   link::to_pkg("tidyverse")
+#'
+#'   link::to_call("dplyr::summarise()")
+#'   link::to_call("dplyr::summarise()")
+#' }
+#'
+#' link::to_pkg("tidyverse", type = "plain")
+#' link::to_call("dplyr::summarise()", type = "plain")
+#'
+#' @export
+auto <- function(type = c("tooltip", "plain"), keep_braces = TRUE, keep_pkg_prefix = TRUE) {
+  type <- rlang::arg_match(type)
+  default_text_hook <- knitr::knit_hooks$get("text")
+  knitr::knit_hooks$set(text = function(x) {
+
+    x <- autolink_pkg(x, type = type, keep_braces = keep_braces)
+    x <- autolink_call(x, type = type, keep_pkg_prefix = keep_pkg_prefix)
+
+    default_text_hook(x)
+  })
+
+  # This is a hack because I currently don't know how to inject the
+  # dependencies otherwise
+  switch(
+    type,
+    tooltip = bslib::tooltip("", ""),
+
+    invisible(NULL)
+  )
+}
+
 get_title <- function(url) {
   httr2::request(url) |>
     httr2::req_perform() |>
@@ -64,54 +113,5 @@ autolink_call <- function(x, type, keep_pkg_prefix = TRUE) {
     x, rx_call, function(call) {
       as.character(to_call(call, type = type, keep_pkg_prefix = keep_pkg_prefix))
     }
-  )
-}
-
-#' Setup automatic linking
-#'
-#' @param type "plain" for plain links, "tooltip" for adding a tooltip
-#' @param keep_braces Should the braces be kept ?
-#' @param keep_pkg_prefix Should the package prefix be kept ?
-#' @param pkg package name
-#' @param call Function call of the form `pkg::fun()`
-#' @param ... See [bslib::tooltip()]
-#'
-#' @examples
-#'
-#' \dontrun{
-#'   # auto is mostly meant to be called inside rmarkdown or quarto documents
-#'   auto()
-#'   auto(keep_braces = FALSE, keep_pkg_prefix = FALSE)
-#'
-#'   # manually generate the tooltips for {pkg} and pkg::fun()
-#'   link::to_pkg("tidyverse")
-#'   link::to_pkg("tidyverse")
-#'
-#'   link::to_call("dplyr::summarise()")
-#'   link::to_call("dplyr::summarise()")
-#' }
-#'
-#' link::to_pkg("tidyverse", type = "plain")
-#' link::to_call("dplyr::summarise()", type = "plain")
-#'
-#' @export
-auto <- function(type = c("tooltip", "plain"), keep_braces = TRUE, keep_pkg_prefix = TRUE) {
-  type <- rlang::arg_match(type)
-  default_text_hook <- knitr::knit_hooks$get("text")
-  knitr::knit_hooks$set(text = function(x) {
-
-    x <- autolink_pkg(x, type = type, keep_braces = keep_braces)
-    x <- autolink_call(x, type = type, keep_pkg_prefix = keep_pkg_prefix)
-
-    default_text_hook(x)
-  })
-
-  # This is a hack because I currently don't know how to inject the
-  # dependencies otherwise
-  switch(
-    type,
-    tooltip = bslib::tooltip("", ""),
-
-    invisible(NULL)
   )
 }
