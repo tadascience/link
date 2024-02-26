@@ -18,7 +18,7 @@ tip_pkg <- function(pkg, keep_braces = TRUE, text = get_title(url), ...) {
   url <- downlit::href_package(pkg)
   link_text <- if (keep_braces) "{{{pkg}}}" else "{pkg}"
   bslib::tooltip(
-    tags$a(glue::glue(link_text), href = url, class = "r-link-pkg"),
+    tags$a(glue::glue(link_text), href = url, target = "_blank", class = "r-link-pkg"),
     text,
     ...
   )
@@ -36,7 +36,7 @@ tip_call <- function(call, keep_pkg_prefix = TRUE, text = get_title(url), ...) {
   }
 
   bslib::tooltip(
-    tags$a(link_text, href = url, class = "r-link-call"),
+    tags$a(link_text, href = url, target = "_blank", class = "r-link-call"),
     text,
     ...
   )
