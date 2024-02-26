@@ -14,11 +14,17 @@ get_title <- function(url) {
 
 #' @rdname auto
 #' @export
-tip_pkg <- function(pkg, keep_braces = TRUE, text = get_title(url), ...) {
+link_pkg <- function(pkg, keep_braces = TRUE) {
   url <- downlit::href_package(pkg)
   link_text <- if (keep_braces) "{{{pkg}}}" else "{pkg}"
+  tags$a(glue::glue(link_text), href = url, class = "r-link-pkg")
+}
+
+#' @rdname auto
+#' @export
+tip_pkg <- function(pkg, keep_braces = TRUE, text = get_title(url), ...) {
   bslib::tooltip(
-    tags$a(glue::glue(link_text), href = url, class = "r-link-pkg"),
+    link_pkg(pkg, keep_braces = keep_braces),
     text,
     ...
   )
@@ -26,7 +32,7 @@ tip_pkg <- function(pkg, keep_braces = TRUE, text = get_title(url), ...) {
 
 #' @rdname auto
 #' @export
-tip_call <- function(call, keep_pkg_prefix = TRUE, text = get_title(url), ...) {
+link_call <- function(call, keep_pkg_prefix = TRUE) {
   url <- downlit::autolink_url(call)
 
   link_text <- if (keep_pkg_prefix) {
@@ -35,12 +41,17 @@ tip_call <- function(call, keep_pkg_prefix = TRUE, text = get_title(url), ...) {
     glue::glue("{fun}()", fun = stringr::str_extract(call, rx_call, group = 2))
   }
 
+  tags$a(link_text, href = url, class = "r-link-call")
+}
+
+#' @rdname auto
+#' @export
+tip_call <- function(call, keep_pkg_prefix = TRUE, text = get_title(url), ...) {
   bslib::tooltip(
-    tags$a(link_text, href = url, class = "r-link-call"),
+    link_call(call, keep_pkg_prefix = keep_pkg_prefix),
     text,
     ...
   )
-
 }
 
 autolink_pkg <- function(x, keep_braces = TRUE) {
@@ -79,12 +90,14 @@ autolink_call <- function(x, keep_pkg_prefix = TRUE) {
 #'
 #'   # manually generate the tooltips for {pkg} and pkg::fun()
 #'   tip_pkg("tidyverse")
+#'   link_pkg("tidyverse")
+#'
 #'   tip_call("dplyr::summarise()")
+#'   link_call("dplyr::summarise()")
 #' }
 #'
-#' # You typically don't need to supply the text, but you can
-#' tip_pkg("tidyverse", text = "The tidyverse")
-#' tip_call("dplyr::summarise()", text = "Summarise each group down to one row")
+#' link_pkg("tidyverse")
+#' link_call("dplyr::summarise()")
 #'
 #' @export
 auto <- function(keep_braces = TRUE, keep_pkg_prefix = TRUE) {
