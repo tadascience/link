@@ -1,5 +1,5 @@
 Package: link
-Title: Hyperlink automatic detection
+Title: Hyperlink Automatic Detection
 Version: 2024.2.0
 Authors@R: 
     person("Romain", "François", email = "romain@tada.science", role = c("aut", "cre", "cph"))
