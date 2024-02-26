@@ -17,7 +17,7 @@ get_title <- function(url) {
 link_pkg <- function(pkg, keep_braces = TRUE) {
   url <- downlit::href_package(pkg)
   link_text <- if (keep_braces) "{{{pkg}}}" else "{pkg}"
-  tags$a(glue::glue(link_text), href = url, class = "r-link-pkg")
+  tags$a(glue::glue(link_text), href = url, class = "r-link-pkg", target = "_blank")
 }
 
 #' @rdname auto
@@ -41,7 +41,7 @@ link_call <- function(call, keep_pkg_prefix = TRUE) {
     glue::glue("{fun}()", fun = stringr::str_extract(call, rx_call, group = 2))
   }
 
-  tags$a(link_text, href = url, class = "r-link-call")
+  tags$a(link_text, href = url, class = "r-link-call", target = "_blank")
 }
 
 #' @rdname auto
