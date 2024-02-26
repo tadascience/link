@@ -12,12 +12,31 @@ get_title <- function(url) {
     xml2::xml_text()
 }
 
+get_description <- function(url) {
+  httr2::request(url) |>
+    httr2::req_perform() |>
+    httr2::resp_body_html() |>
+    xml2::xml_find_all("//meta[@name='description']") |>
+    xml2::xml_attr("content")
+}
+
 info_pkg <- function(pkg, keep_braces = TRUE){
   url <- downlit::href_package(pkg)
   link_text <- glue::glue(if (keep_braces) "{{{pkg}}}" else "{pkg}")
   link <- tags$a(link_text, href = url, class = "r-link-pkg", target = "_blank")
 
   list(url = url, link_text = link_text, link = link)
+}
+
+tip_elements <- function(url) {
+  title <- get_title(url)
+  description <- get_description(url)
+
+  list(
+    title,
+    tags$br(),
+    tags$span(description, style = "font-size: smaller")
+  )
 }
 
 #' @rdname auto
@@ -28,13 +47,9 @@ link_pkg <- function(pkg, keep_braces = TRUE) {
 
 #' @rdname auto
 #' @export
-tip_pkg <- function(pkg, keep_braces = TRUE, text, ...) {
+tip_pkg <- function(pkg, keep_braces = TRUE, ...) {
   info <- info_pkg(pkg, keep_braces = keep_braces)
-  if (missing(text)) {
-    text <- get_title(info$url)
-  }
-
-  bslib::tooltip(info$link, text, ...)
+  bslib::tooltip(info$link, !!!tip_elements(info$url))
 }
 
 info_call <- function(call, keep_pkg_prefix = TRUE) {
@@ -60,13 +75,9 @@ link_call <- function(call, keep_pkg_prefix = TRUE) {
 
 #' @rdname auto
 #' @export
-tip_call <- function(call, keep_pkg_prefix = TRUE, text, ...) {
+tip_call <- function(call, keep_pkg_prefix = TRUE, ...) {
   info <- info_call(call, keep_pkg_prefix = keep_pkg_prefix)
-  if (missing(text)) {
-    text <- get_title(info$url)
-  }
-
-  bslib::tooltip(info$link, text, ...)
+  bslib::tooltip(info$link, !!!tip_elements(info$url), ...)
 }
 
 autolink_pkg <- function(x, keep_braces = TRUE) {
@@ -93,9 +104,8 @@ autolink_call <- function(x, keep_pkg_prefix = TRUE) {
 #' @param keep_pkg_prefix Should the package prefix be kept ?
 #' @param pkg package name
 #' @param call Function call of the form `pkg::fun()`
-#' @param text Tooltip text, set to the title of the resolved url by default
 #' @param ... See [bslib::tooltip()]
-
+#'
 #' @examples
 #'
 #' \dontrun{

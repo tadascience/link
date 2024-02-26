@@ -10,11 +10,11 @@
 \usage{
 link_pkg(pkg, keep_braces = TRUE)
 
-tip_pkg(pkg, keep_braces = TRUE, text, ...)
+tip_pkg(pkg, keep_braces = TRUE, ...)
 
 link_call(call, keep_pkg_prefix = TRUE)
 
-tip_call(call, keep_pkg_prefix = TRUE, text, ...)
+tip_call(call, keep_pkg_prefix = TRUE, ...)
 
 auto(keep_braces = TRUE, keep_pkg_prefix = TRUE)
 }
@@ -22,8 +22,6 @@ auto(keep_braces = TRUE, keep_pkg_prefix = TRUE)
 \item{pkg}{package name}
 
 \item{keep_braces}{Should the braces be kept ?}
-
-\item{text}{Tooltip text, set to the title of the resolved url by default}
 
 \item{...}{See \code{\link[bslib:tooltip]{bslib::tooltip()}}}
 
