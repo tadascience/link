@@ -1,9 +1,10 @@
 Package: link
-Title: Hyperlinks
+Title: Hyperlink automatic detection
 Version: 2024.2.0
 Authors@R: 
     person("Romain", "François", email = "romain@tada.science", role = c("aut", "cre"))
-Description: Hyperlink tools for blogs.
+Description: Automatic detection of hyperlinks for packages and calls in the text
+    of 'rmarkdown' or 'quarto' documents.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
