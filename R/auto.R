@@ -12,28 +12,32 @@ get_title <- function(url) {
     xml2::xml_text()
 }
 
-tip_pkg <- function(pkg, keep_braces = TRUE, title = get_title(url), ...) {
+#' @rdname auto
+#' @export
+tip_pkg <- function(pkg, keep_braces = TRUE, text = get_title(url), ...) {
   url <- downlit::href_package(pkg)
-  text <- if (keep_braces) "{{{pkg}}}" else "{pkg}"
+  link_text <- if (keep_braces) "{{{pkg}}}" else "{pkg}"
   bslib::tooltip(
-    tags$a(glue::glue(text), href = url, class = "r-link-pkg"),
-    title,
+    tags$a(glue::glue(link_text), href = url, class = "r-link-pkg"),
+    text,
     ...
   )
 }
 
-tip_call <- function(call, keep_pkg_prefix = TRUE, title = get_title(url), ...) {
+#' @rdname auto
+#' @export
+tip_call <- function(call, keep_pkg_prefix = TRUE, text = get_title(url), ...) {
   url <- downlit::autolink_url(call)
 
-  text <- if (keep_pkg_prefix) {
+  link_text <- if (keep_pkg_prefix) {
     call
   } else {
     glue::glue("{fun}()", fun = stringr::str_extract(call, rx_call, group = 2))
   }
 
   bslib::tooltip(
-    tags$a(text, href = url, class = "r-link-call"),
-    title,
+    tags$a(link_text, href = url, class = "r-link-call"),
+    text,
     ...
   )
 
@@ -61,10 +65,24 @@ autolink_call <- function(x, keep_pkg_prefix = TRUE) {
 #'
 #' @param keep_braces Should the braces be kept ?
 #' @param keep_pkg_prefix Should the package prefix be kept ?
-#'
+#' @param pkg package name
+#' @param call Function call of the form `pkg::fun()`
+#' @param text Tooltip text, set to the title of the resolved url by default
+#' @param ... See [bslib::tooltip()]
+
 #' @examples
+#'
+#' tip_pkg("tidyverse", text = "The tidyverse")
+#' tip_call("dplyr::summarise()", text = "Summarise each group down to one row")
+#'
 #' \dontrun{
+#'   # auto is mostly meant to be called inside rmarkdown or quarto documents
 #'   auto()
+#'   auto(keep_braces = FALSE, keep_pkg_prefix = FALSE)
+#'
+#'   # manually generate the tooltips for {pkg} and pkg::fun()
+#'   tip_pkg("tidyverse")
+#'   tip_call("dplyr::summarise()")
 #' }
 #'
 #' @export
