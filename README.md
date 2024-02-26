@@ -36,3 +36,10 @@ You can drop the `{` and the `pkg::` if you like:
     ```{r, echo = FALSE}
     link::auto(keep_braces = FALSE, keep_pkg_prefix = FALSE)
     ```
+
+By default, [bslib](https://rstudio.github.io/bslib/) powered tooltips
+are added. You can opt-out with `type = "plain"`.
+
+    ```{r, echo = FALSE}
+    link::auto(type = "plain")
+    ```
