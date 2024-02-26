@@ -10,11 +10,11 @@
 \usage{
 link_pkg(pkg, keep_braces = TRUE)
 
-tip_pkg(pkg, keep_braces = TRUE, text = get_title(url), ...)
+tip_pkg(pkg, keep_braces = TRUE, text, ...)
 
 link_call(call, keep_pkg_prefix = TRUE)
 
-tip_call(call, keep_pkg_prefix = TRUE, text = get_title(url), ...)
+tip_call(call, keep_pkg_prefix = TRUE, text, ...)
 
 auto(keep_braces = TRUE, keep_pkg_prefix = TRUE)
 }
