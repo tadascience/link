@@ -12,27 +12,32 @@ get_title <- function(url) {
     xml2::xml_text()
 }
 
+info_pkg <- function(pkg, keep_braces = TRUE){
+  url <- downlit::href_package(pkg)
+  link_text <- glue::glue(if (keep_braces) "{{{pkg}}}" else "{pkg}")
+  link <- tags$a(link_text, href = url, class = "r-link-pkg", target = "_blank")
+
+  list(url = url, link_text = link_text, link = link)
+}
+
 #' @rdname auto
 #' @export
 link_pkg <- function(pkg, keep_braces = TRUE) {
-  url <- downlit::href_package(pkg)
-  link_text <- if (keep_braces) "{{{pkg}}}" else "{pkg}"
-  tags$a(glue::glue(link_text), href = url, class = "r-link-pkg", target = "_blank")
+  info_pkg(pkg, keep_braces = keep_braces)$link
 }
 
 #' @rdname auto
 #' @export
-tip_pkg <- function(pkg, keep_braces = TRUE, text = get_title(url), ...) {
-  bslib::tooltip(
-    link_pkg(pkg, keep_braces = keep_braces),
-    text,
-    ...
-  )
+tip_pkg <- function(pkg, keep_braces = TRUE, text, ...) {
+  info <- info_pkg(pkg, keep_braces = keep_braces)
+  if (missing(text)) {
+    text <- get_title(info$url)
+  }
+
+  bslib::tooltip(info$link, text, ...)
 }
 
-#' @rdname auto
-#' @export
-link_call <- function(call, keep_pkg_prefix = TRUE) {
+info_call <- function(call, keep_pkg_prefix = TRUE) {
   url <- downlit::autolink_url(call)
 
   link_text <- if (keep_pkg_prefix) {
@@ -41,17 +46,27 @@ link_call <- function(call, keep_pkg_prefix = TRUE) {
     glue::glue("{fun}()", fun = stringr::str_extract(call, rx_call, group = 2))
   }
 
-  tags$a(link_text, href = url, class = "r-link-call", target = "_blank")
+  link <- tags$a(link_text, href = url, class = "r-link-call", target = "_blank")
+
+  list(url = url, link_text = link_text, link = link)
+}
+
+
+#' @rdname auto
+#' @export
+link_call <- function(call, keep_pkg_prefix = TRUE) {
+  info_call(call, keep_pkg_prefix = keep_pkg_prefix)$link
 }
 
 #' @rdname auto
 #' @export
-tip_call <- function(call, keep_pkg_prefix = TRUE, text = get_title(url), ...) {
-  bslib::tooltip(
-    link_call(call, keep_pkg_prefix = keep_pkg_prefix),
-    text,
-    ...
-  )
+tip_call <- function(call, keep_pkg_prefix = TRUE, text, ...) {
+  info <- info_call(call, keep_pkg_prefix = keep_pkg_prefix)
+  if (missing(text)) {
+    text <- get_title(info$url)
+  }
+
+  bslib::tooltip(info$link, text, ...)
 }
 
 autolink_pkg <- function(x, keep_braces = TRUE) {
