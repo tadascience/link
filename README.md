@@ -26,3 +26,13 @@ pak::pak("tadascience/link")
 
 Include this in your `Rmd` or `qmd` document to turn `<pkg>::<fun>()`
 and `{<pkg>}` into hyperlinks.
+
+    ```{r, echo = FALSE}
+    link::auto()
+    ```
+
+You can drop the `{` and the `pkg::` if you like:
+
+    ```{r, echo = FALSE}
+    link::auto(keep_braces = FALSE, keep_pkg_prefix = FALSE)
+    ```
