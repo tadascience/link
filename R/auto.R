@@ -72,9 +72,6 @@ autolink_call <- function(x, keep_pkg_prefix = TRUE) {
 
 #' @examples
 #'
-#' tip_pkg("tidyverse", text = "The tidyverse")
-#' tip_call("dplyr::summarise()", text = "Summarise each group down to one row")
-#'
 #' \dontrun{
 #'   # auto is mostly meant to be called inside rmarkdown or quarto documents
 #'   auto()
@@ -84,6 +81,10 @@ autolink_call <- function(x, keep_pkg_prefix = TRUE) {
 #'   tip_pkg("tidyverse")
 #'   tip_call("dplyr::summarise()")
 #' }
+#'
+#' # You typically don't need to supply the text, but you can
+#' tip_pkg("tidyverse", text = "The tidyverse")
+#' tip_call("dplyr::summarise()", text = "Summarise each group down to one row")
 #'
 #' @export
 auto <- function(keep_braces = TRUE, keep_pkg_prefix = TRUE) {

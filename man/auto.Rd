@@ -30,9 +30,6 @@ Setup automatic linking
 }
 \examples{
 
-tip_pkg("tidyverse", text = "The tidyverse")
-tip_call("dplyr::summarise()", text = "Summarise each group down to one row")
-
 \dontrun{
   # auto is mostly meant to be called inside rmarkdown or quarto documents
   auto()
@@ -42,5 +39,9 @@ tip_call("dplyr::summarise()", text = "Summarise each group down to one row")
   tip_pkg("tidyverse")
   tip_call("dplyr::summarise()")
 }
+
+# You typically don't need to supply the text, but you can
+tip_pkg("tidyverse", text = "The tidyverse")
+tip_call("dplyr::summarise()", text = "Summarise each group down to one row")
 
 }
