@@ -12,94 +12,64 @@ get_title <- function(url) {
     xml2::xml_text()
 }
 
-get_description <- function(url) {
-  httr2::request(url) |>
-    httr2::req_perform() |>
-    httr2::resp_body_html() |>
-    xml2::xml_find_all("//meta[@name='description']") |>
-    xml2::xml_attr("content")
-}
 
-info_pkg <- function(pkg, keep_braces = TRUE){
+#' @rdname auto
+#' @export
+to_pkg <- function(pkg, type = c("tooltip", "plain"), keep_braces = TRUE, ...) {
+  type <- rlang::arg_match(type)
+
   url <- downlit::href_package(pkg)
   link_text <- glue::glue(if (keep_braces) "{{{pkg}}}" else "{pkg}")
   link <- tags$a(link_text, href = url, class = "r-link-pkg", target = "_blank")
 
-  list(url = url, link_text = link_text, link = link)
-}
-
-tip_elements <- function(url) {
-  title <- get_title(url)
-  description <- get_description(url)
-
-  list(
-    title,
-    tags$br(),
-    tags$span(description, style = "font-size: smaller")
+  switch(
+    type,
+    plain = link,
+    tooltip = bslib::tooltip(link, get_title(url))
   )
 }
 
 #' @rdname auto
 #' @export
-link_pkg <- function(pkg, keep_braces = TRUE) {
-  info_pkg(pkg, keep_braces = keep_braces)$link
-}
+to_call <- function(call, type = c("tooltip", "plain"), keep_pkg_prefix = TRUE, ...) {
+  type <- rlang::arg_match(type)
 
-#' @rdname auto
-#' @export
-tip_pkg <- function(pkg, keep_braces = TRUE, ...) {
-  info <- info_pkg(pkg, keep_braces = keep_braces)
-  bslib::tooltip(info$link, !!!tip_elements(info$url))
-}
-
-info_call <- function(call, keep_pkg_prefix = TRUE) {
   url <- downlit::autolink_url(call)
-
   link_text <- if (keep_pkg_prefix) {
     call
   } else {
     glue::glue("{fun}()", fun = stringr::str_extract(call, rx_call, group = 2))
   }
-
   link <- tags$a(link_text, href = url, class = "r-link-call", target = "_blank")
 
-  list(url = url, link_text = link_text, link = link)
+  switch(
+    type,
+    plain = link,
+    tooltip = bslib::tooltip(link, get_title(url))
+  )
 }
 
-
-#' @rdname auto
-#' @export
-link_call <- function(call, keep_pkg_prefix = TRUE) {
-  info_call(call, keep_pkg_prefix = keep_pkg_prefix)$link
-}
-
-#' @rdname auto
-#' @export
-tip_call <- function(call, keep_pkg_prefix = TRUE, ...) {
-  info <- info_call(call, keep_pkg_prefix = keep_pkg_prefix)
-  bslib::tooltip(info$link, !!!tip_elements(info$url), ...)
-}
-
-autolink_pkg <- function(x, keep_braces = TRUE) {
+autolink_pkg <- function(x, type, keep_braces = TRUE) {
   stringr::str_replace_all(
     x, rx_pkg,
     function(pkg) {
       pkg <- stringr::str_extract(pkg, rx_pkg, group = 1)
-      as.character(tip_pkg(pkg, keep_braces = keep_braces))
+      as.character(to_pkg(pkg, type = type, keep_braces = keep_braces))
     }
   )
 }
 
-autolink_call <- function(x, keep_pkg_prefix = TRUE) {
+autolink_call <- function(x, type, keep_pkg_prefix = TRUE) {
   stringr::str_replace_all(
     x, rx_call, function(call) {
-      as.character(tip_call(call, keep_pkg_prefix = keep_pkg_prefix))
+      as.character(to_call(call, type = type, keep_pkg_prefix = keep_pkg_prefix))
     }
   )
 }
 
 #' Setup automatic linking
 #'
+#' @param type "plain" for plain links, "tooltip" for adding a tooltip
 #' @param keep_braces Should the braces be kept ?
 #' @param keep_pkg_prefix Should the package prefix be kept ?
 #' @param pkg package name
@@ -114,28 +84,34 @@ autolink_call <- function(x, keep_pkg_prefix = TRUE) {
 #'   auto(keep_braces = FALSE, keep_pkg_prefix = FALSE)
 #'
 #'   # manually generate the tooltips for {pkg} and pkg::fun()
-#'   tip_pkg("tidyverse")
-#'   link_pkg("tidyverse")
+#'   link::to_pkg("tidyverse")
+#'   link::to_pkg("tidyverse")
 #'
-#'   tip_call("dplyr::summarise()")
-#'   link_call("dplyr::summarise()")
+#'   link::to_call("dplyr::summarise()")
+#'   link::to_call("dplyr::summarise()")
 #' }
 #'
-#' link_pkg("tidyverse")
-#' link_call("dplyr::summarise()")
+#' link::to_pkg("tidyverse", type = "plain")
+#' link::to_call("dplyr::summarise()", type = "plain")
 #'
 #' @export
-auto <- function(keep_braces = TRUE, keep_pkg_prefix = TRUE) {
+auto <- function(type = c("tooltip", "plain"), keep_braces = TRUE, keep_pkg_prefix = TRUE) {
+  type <- rlang::arg_match(type)
   default_text_hook <- knitr::knit_hooks$get("text")
   knitr::knit_hooks$set(text = function(x) {
 
-    x <- autolink_pkg(x, keep_braces)
-    x <- autolink_call(x, keep_pkg_prefix)
+    x <- autolink_pkg(x, type = type, keep_braces = keep_braces)
+    x <- autolink_call(x, type = type, keep_pkg_prefix = keep_pkg_prefix)
 
     default_text_hook(x)
   })
 
   # This is a hack because I currently don't know how to inject the
   # dependencies otherwise
-  bslib::tooltip("", "")
+  switch(
+    type,
+    tooltip = bslib::tooltip("", ""),
+
+    invisible(NULL)
+  )
 }

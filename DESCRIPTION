@@ -15,6 +15,7 @@ Imports:
     htmltools,
     httr2,
     knitr,
+    rlang,
     stringr,
     xml2
 URL: https://github.com/tadascience/link, https://link.tada.science/
