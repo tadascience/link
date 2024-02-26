@@ -4,7 +4,12 @@
 \alias{auto}
 \title{Setup automatic linking}
 \usage{
-auto()
+auto(keep_braces = TRUE, keep_pkg_prefix = TRUE)
+}
+\arguments{
+\item{keep_braces}{Should the braces be kept ?}
+
+\item{keep_pkg_prefix}{Should the package prefix be kept ?}
 }
 \description{
 Setup automatic linking
