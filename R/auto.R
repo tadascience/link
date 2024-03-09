@@ -68,9 +68,12 @@ get_title <- function(url) {
 #' @export
 to_pkg <- function(pkg, type = c("tooltip", "plain"), keep_braces = TRUE, ...) {
   type <- rlang::arg_match(type)
+  link_text <- glue::glue(if (keep_braces) "{{{pkg}}}" else "{pkg}")
 
   url <- downlit::href_package(pkg)
-  link_text <- glue::glue(if (keep_braces) "{{{pkg}}}" else "{pkg}")
+  if (is.na(url)) {
+    return(tags$span(link_text, class = "r-link-pkg-error"))
+  }
   link <- tags$a(link_text, href = url, class = "r-link-pkg", target = "_blank")
 
   switch(
@@ -85,11 +88,15 @@ to_pkg <- function(pkg, type = c("tooltip", "plain"), keep_braces = TRUE, ...) {
 to_call <- function(call, type = c("tooltip", "plain"), keep_pkg_prefix = TRUE, ...) {
   type <- rlang::arg_match(type)
 
-  url <- downlit::autolink_url(call)
   link_text <- if (keep_pkg_prefix) {
     call
   } else {
     glue::glue("{fun}()", fun = stringr::str_extract(call, rx_call, group = 2))
+  }
+
+  url <- downlit::autolink_url(call)
+  if (is.na(url)) {
+    return(tags$span(link_text, class = "r-link-pkg-error"))
   }
   link <- tags$a(link_text, href = url, class = "r-link-call", target = "_blank")
 
