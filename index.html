@@ -89,17 +89,17 @@
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>Include this in your <code>Rmd</code> or <code>qmd</code> document to turn <code>&lt;pkg&gt;::&lt;fun&gt;()</code> and <code>{&lt;pkg&gt;}</code> into hyperlinks.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r, echo = FALSE}</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">link::auto()</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="st">```</span><span class="at">{r, echo = FALSE}</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="at">link::auto()</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 <p>You can drop the <code>{</code> and the <code>pkg::</code> if you like:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r, echo = FALSE}</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">link::auto(keep_braces = FALSE, keep_pkg_prefix = FALSE)</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="st">```</span><span class="at">{r, echo = FALSE}</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="at">link::auto(keep_braces = FALSE, keep_pkg_prefix = FALSE)</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 <p>By default, <a href="https://rstudio.github.io/bslib/" class="external-link">bslib</a> powered tooltips are added. You can opt-out with <code>type = "plain"</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r, echo = FALSE}</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">link::auto(type = "plain")</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="st">```</span><span class="at">{r, echo = FALSE}</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="at">link::auto(type = "plain")</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
