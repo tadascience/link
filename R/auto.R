@@ -13,6 +13,8 @@ rx_call <- glue::glue("({rx_valid_pkg})::({rx_valid_fun})\\(\\)")
 #' @param call Function call of the form `pkg::fun()`
 #' @param ... See [bslib::tooltip()]
 #'
+#' @return [to_pkg()] and [to_call()] return text to include in html documents
+#'
 #' @examples
 #'
 #' \dontrun{
